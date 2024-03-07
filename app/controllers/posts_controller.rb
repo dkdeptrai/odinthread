@@ -10,15 +10,14 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.new(post_params)
-		@post.save
-		redirect_to @posts
+		@post = Post.create!(post_params)
+		redirect_to posts_path
 	end
 
 	def like
 		@post = Post.find(params[:id])
 		@post.increment!(:likes_count, 1)
-		
+
 		Like.create!(user_id: current_user.id, post_id: @post.id)
 		redirect_to posts_path
 	end
@@ -33,6 +32,6 @@ class PostsController < ApplicationController
 	private
 
 	def post_params
-		params.require(:post).permit(:author, :body)
+		params.require(:post).permit(:author_id, :content)
 	end
 end

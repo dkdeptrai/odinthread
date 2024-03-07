@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
 		@profile = Profile.find(params[:id])
 		@user = @profile.user
 		@follow = Follow.find_by(user_id: @user.id, follower_id: current_user.id)
+		@posts = Post.where(author_id: @user.id)
 	end
 
 	def edit; end

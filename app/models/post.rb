@@ -20,9 +20,10 @@
 #  author_id  (author_id => users.id)
 #
 class Post < ApplicationRecord
-  belongs_to :author, class_name: 'User'
-  has_many :likes
-  def liked_by?(user)
-    likes.exists?(user:)
-  end
+	belongs_to :author, class_name: 'User'
+	has_many :likes
+
+	def liked_by?(user)
+		likes.exists?(user: user)
+	end
 end
