@@ -1,0 +1,12 @@
+<h1>Profiles#show</h1>
+<p>Find me in app/views/profiles/show.html.erb</p>
+<!-- show profile information here -->
+<div><%= @profile.name %></div>
+<div><%= @profile.bio %></div>
+<% if current_user.id != @profile.user_id %>
+	<% if @follow %>
+		<%= button_to "Unfollow", unfollow_user_profile_path(@profile.user, @profile), method: :delete %>
+	<% else %>
+		<%= button_to "Follow", follow_user_profile_path(@profile.user, @profile), method: :post %>
+	<% end %>
+<% end %>
