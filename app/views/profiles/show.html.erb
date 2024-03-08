@@ -1,6 +1,11 @@
 <!-- show profile information here -->
 <h1><%= @profile.name %></h1>
-<h3><%= @profile.bio %></h3>
+<div class="d-flex justify-content-between">
+	<h3><%= @profile.bio %></h3>
+	<% if @profile.user_id == current_user.id %>
+		<%= link_to "Edit Profile", edit_user_profile_path(@profile.user, @profile), method: :get %>
+	<% end %>
+</div>
 <% if current_user.id != @profile.user_id %>
 	<% if @follow %>
 		<%= button_to "Unfollow", unfollow_user_profile_path(@profile.user, @profile), method: :delete %>

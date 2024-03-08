@@ -1,2 +1,17 @@
 <h1>Profiles#edit</h1>
 <p>Find me in app/views/profiles/edit.html.erb</p>
+<h1>Edit Profile</h1>
+<%= form_with model: @profile, url: user_profile_path(@profile.user, @profile), local: true do |f| %>
+	<div>
+		<%= f.label :name %>
+		<%= f.text_field :name, value: @profile.name %>
+	</div>
+
+	<div>
+		<%= f.label :bio %>
+		<%= f.text_area :bio, value: @profile.bio %>
+	</div>
+
+	<%= f.submit %>
+<% end %>
+

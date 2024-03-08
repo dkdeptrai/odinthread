@@ -1,11 +1,8 @@
 <h1>This is posts#index</h1>
 
-<%= form_with model: Post.new do |f| %>
-	<%= f.hidden_field :author_id, value: current_user.id %>
-	<%= f.text_area :content %>
-	<%= f.submit 'Create Post' %>
-<% end %>
+<%= render 'form', post: @post %>
 
-<% @posts.each do |post| %>
-	<%= render partial: post %>
+<%= turbo_stream_from 'posts' %>
+<%= turbo_frame_tag 'posts' do %>
+	<%= render @posts %>
 <% end %>

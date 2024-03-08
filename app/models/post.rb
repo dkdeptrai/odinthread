@@ -21,9 +21,22 @@
 #
 class Post < ApplicationRecord
 	belongs_to :author, class_name: 'User'
+	validates :content, presence: true
 	has_many :likes
 
+	after_create_commit do
+		broadcast_prepend_to 'posts'
+	end
+
+	after_update_commit do
+		broadcast_replace_to 'posts'
+	end
+
+	after_destroy_commit do
+		broadcast_remove_to 'posts'
+	end
+
 	def liked_by?(user)
-		likes.exists?(user: user)
+		likes.exists?(user:)
 	end
 end

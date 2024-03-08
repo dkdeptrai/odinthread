@@ -1,0 +1,5 @@
+<%= form_with model: Post.new do |f| %>
+	<%= f.hidden_field :author_id, value: current_user.id %>
+	<%= f.text_area :content %>
+	<%= f.submit 'Create Post' %>
+<% end %>

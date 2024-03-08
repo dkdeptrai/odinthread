@@ -11,12 +11,8 @@ Rails.application.routes.draw do
 	get 'up' => 'rails/health#show', as: :rails_health_check
 
 	# Defines the root path route ("/")
-	root 'posts#index'
 	resources :posts do
-		collection do
-			post '/posts/:id/like', to: 'posts#like', as: 'like'
-			delete '/posts/:id/unlike', to: 'posts#unlike', as: 'unlike'
-		end
+		resources :likes
 	end
 
 	resources :users do
@@ -27,4 +23,6 @@ Rails.application.routes.draw do
 			end
 		end
 	end
+	root 'posts#index'
+	
 end
