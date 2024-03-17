@@ -24,19 +24,20 @@ class Post < ApplicationRecord
 	validates :content, presence: true
 	has_many :likes
 
-	after_create_commit do
-		broadcast_prepend_to 'posts'
+	after_commit :update_posts, on: [:create, :destroy]
+	after_commit :update_likes_count, on: :update
+
+	def update_posts
+
+		broadcast_prepend_to 'posts', partial: 'posts/post', locals: { post: self }, target: 'posts'
 	end
 
-	after_update_commit do
+	def update_likes_count
+		puts "update_likes_count!!!"
 		broadcast_replace_to 'posts'
 	end
 
-	after_destroy_commit do
-		broadcast_remove_to 'posts'
-	end
-
 	def liked_by?(user)
-		likes.exists?(user:)
+		likes.exists?(user: user, post: self)
 	end
 end

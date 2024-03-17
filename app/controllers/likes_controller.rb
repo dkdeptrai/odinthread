@@ -3,15 +3,18 @@ class LikesController < ApplicationController
 	before_action :set_like, only: %i[destroy]
 
 	def create
-		@post.increment! :likes_count
 		@post.likes.create(user: current_user)
-		redirect_to @post
+		@post.increment! :likes_count
+		@post.touch
+
+		# redirect_to @post
 	end
 
 	def destroy
-		@post.decrement! :likes_count
 		@like.destroy
-		redirect_to @post
+		@post.decrement! :likes_count
+		@post.touch
+		# redirect_to @post
 	end
 
 	private
