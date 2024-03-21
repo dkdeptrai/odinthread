@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
 	# Defines the root path route ("/")
 	resources :posts do
+		get 'show', to: 'posts#show', as: 'show'
 		resources :likes
+
 	end
 
 	resources :users do
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
 			end
 		end
 	end
+	resources :comments
+
 	root 'posts#index'
-	
+
 end

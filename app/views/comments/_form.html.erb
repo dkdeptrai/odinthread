@@ -1,0 +1,7 @@
+<div>
+	<%= form_with model: @comment, url: comments_path, local: true do |form| %>
+		<%= form.hidden_field 'comment[post_id]', value: @post.id %>
+		<%= form.text_field 'comment[content]', require: true %>
+		<%= form.submit "Add Comment" %>
+	<% end %>
+</div>

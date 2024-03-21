@@ -23,6 +23,7 @@ class Post < ApplicationRecord
 	belongs_to :author, class_name: 'User'
 	validates :content, presence: true
 	has_many :likes
+	has_many :comments, dependent: :destroy
 
 	after_commit :update_posts, on: [:create, :destroy]
 	after_commit :update_likes_count, on: :update

@@ -1,0 +1,11 @@
+<%= turbo_stream_from 'comments' %>
+<%= @post.author.profile.name %>
+<br>
+<%= @post.content %>
+<br>
+
+<%= render 'comments/form' %>
+<%= turbo_frame_tag 'comments' do %>
+	<%= render @comments %>
+<% end %>
+
