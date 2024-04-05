@@ -27,10 +27,15 @@ class Comment < ApplicationRecord
 	belongs_to :user
 	belongs_to :post
 	after_commit :update_comments, on: %i[create destroy update]
+	after_commit :update_comments_count, on: %i[create]
 
 	def update_comments
-		puts "update_comments!!!"
 		broadcast_prepend_to 'comments', partial: 'comments/comment', locals: { comment: self }, target: 'comments'
 	end
 
+	def update_comments_count
+		puts 'update_comments_count!!!'
+		broadcast_replace_to 'posts', partial: 'posts/post', locals: { post: self.post }, target: "post_#{self.post.id}"
+
+	end
 end

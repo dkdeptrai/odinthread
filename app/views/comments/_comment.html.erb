@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(comment) do %>
 	<div>
-		<%= comment.user.profile.name %>
+		<%= link_to comment.user.profile.name, user_profile_path(comment.user, comment.user.profile), data: { turbo_frame: '_top' } %>
 		<br>
 		<%= comment.content %>
 	</div>

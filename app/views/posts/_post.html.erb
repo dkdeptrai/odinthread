@@ -11,7 +11,7 @@
 				Post is not liked by user
 				<%= button_to "Like (#{post.likes_count})", post_likes_path(post), method: 'post' %>
 			<% end %>
-			<%= button_to "Comment", post_path(post), method: 'get', data: { turbo_frame: '_top' } %>
+			<%= button_to "Comment (#{post.comments.count})", post_path(post), method: 'get', data: { turbo_frame: '_top' } %>
 		</div>
 
 	</div>

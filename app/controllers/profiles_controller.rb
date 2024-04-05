@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
 	def show
 		@user = @profile.user
 		@follow = Follow.find_by(user_id: @user.id, follower_id: current_user.id)
-		@posts = Post.where(author_id: @user.id)
+		@posts = Post.where(author_id: @user.id).reverse
 	end
 
 	def edit
